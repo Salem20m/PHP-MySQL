@@ -1,0 +1,14 @@
+# Block access to specific file  
+<files myfile.doc>  
+    Order allow, deny  
+    Deny from all  
+</files>  
+  
+# Block access to multiple file types  
+<FilesMatch "\.(htaccess|htpasswd|ini|psd|log|sh)$">  
+    Order allow, deny  
+    Deny from all  
+</FilesMatch>  
+	  
+# Block list of files  
+Options -Indexes  
