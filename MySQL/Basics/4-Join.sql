@@ -38,3 +38,5 @@ FROM movies_titles
     INNER JOIN movies_ratings ON movies_titles.id = movies_ratings.title_id
     LEFT OUTER JOIN movies_posters ON movies_titles.id = movies_posters.title_id
 ORDER BY rating DESC LIMIT 5;
+
+SELECT * FROM movies_basic ORDER BY id DESC;

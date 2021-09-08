@@ -91,3 +91,15 @@ CREATE TABLE movies_ratings
 ALTER TABLE movies_ratings
     ADD CONSTRAINT title_id_fk
         FOREIGN KEY (title_id) REFERENCES movies_titles (id)
+
+-- TABLE WITH MOPRE THAN ONE PRIMARY KEY
+CREATE TABLE auto_feature
+(
+    auto_id INT,
+    feature_id INT,
+    PRIMARY KEY (auto_id, feature_id),
+    CONSTRAINT auto_id_fk
+        FOREIGN KEY (auto_id) REFERENCES auto (id),
+    CONSTRAINT feature_id_fk
+        FOREIGN KEY (feature_id) REFERENCES feature (id)
+);
