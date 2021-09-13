@@ -59,7 +59,7 @@ function getFeaturesName($autoID, $implode = true) {
     // https://stackoverflow.com/questions/14767530/php-using-pdo-with-in-clause-array
     $in  = str_repeat('?,', count($features) - 1) . '?'; // Create plaholder for each id on $features array ?,?,?,?
     // https://www.w3schools.com/sql/sql_in.asp
-    $stmt= $pdo->prepare("SELECT name FROM feature WHERE id IN (" . $in . ")");
+    $stmt= $pdo->prepare("SELECT name FROM feature WHERE id IN (".$in.")");
     $stmt->execute($features);
     $result = $stmt ->fetchAll();
 

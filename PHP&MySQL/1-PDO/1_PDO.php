@@ -41,9 +41,9 @@
 		echo "<br/>";
 		
 		// INSERT
-		$stmt = $pdo->prepare("INSERT INTO test.movies_basic
+		$stmt = $pdo->prepare("INSERT INTO movies_basic
     							(title, genre, release_year, director, studio, rating) VALUES (?,?,?,?,?,?) ");
-		$stmt->execute(['Salem In The House 2', 'Horror', 2022, 'Salem Alhadrami', 'Reem Studios', 9.3]);
+		$stmt->execute(['Brunoo In The House II', 'Horror', 2022, 'Salem Alhadrami', 'Reem Studios', 9.3]);
 		$affected_rows = $stmt->rowCount();
 		
 		// UPDATE
