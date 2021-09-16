@@ -1,3 +1,14 @@
-composer create-project laravel/laravel {directory}
+composer create-project laravel/laravel {name}
+
+When openning a project that was created in another compoter: 1- "composer install"
+							      2- add the .env file
+							      3- "php artisan key:generate"
 
 Run Project: "php artisan serve"
+
+
+Installing packages or APIs to project: Search for the name of the package in packagist.org, 
+					The package will be added to required in composer/json. and then added to the vendor folder
+					If a package was deleted in the vendor folder: run "composer update" to update the dependencies.
+
+
