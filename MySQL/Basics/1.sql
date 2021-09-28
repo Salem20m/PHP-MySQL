@@ -1,3 +1,6 @@
+-- show the columns and thier properties --
+DESC movies_basic;
+
 -- creating a database
 CREATE DATABASE test;
 

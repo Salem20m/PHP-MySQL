@@ -72,7 +72,9 @@
 
 
 
-
+    // this gets all the methods of the controller
+    // ex. /cars/index will use the index() method in the controller
+    Route::resource('/cars', CarsController::class);
 
 
 
