@@ -10,6 +10,8 @@
 <body>
     <h2>Products</h2>
 
+
+
     @foreach($data as $item)
 
         <p> {{$item}} </p>

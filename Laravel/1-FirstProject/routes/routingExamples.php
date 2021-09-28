@@ -67,7 +67,7 @@
 
     // ADDING A NAME TO THE ROUTE
     // SO YOU CAN REFER BACK TO IT FROM ANY WHERE USING route('routeName')
-    // This is useful in buttons. href="{{ route(routeName) }}"
+    // This is useful in buttons. href="{{ route('routeName') }}"
     Route::get('/products', [ProductsController::class, 'index'])->name('routeName');
 
 

@@ -28,7 +28,7 @@ use App\Http\Controllers\ProductsController;
     Route::get('/products/{id}', [ProductsController::class, 'show'])->where('id', '[0-9]+');
 
     //adding a constraint top the parameter: accepting strings only
-    Route::get('/products/{namw}', [ProductsController::class, 'show'])->where('id', '[aA-zZ]+');
+    Route::get('/products/{name}', [ProductsController::class, 'show'])->where('id', '[aA-zZ]+');
 
     //adding more than a parameter
     Route::get('/products/{id}/{name}', [ProductsController::class, 'showTwo'])->where([

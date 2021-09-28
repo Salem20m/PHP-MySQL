@@ -4,24 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class PagesController extends Controller
 {
 
     public function index()
     {
-        $data = [
-            'product1' => 'iPhone',
-            'product2' => 'Galaxy'
-        ];
-        return view('products.index', compact('data'));
+        return view('index');
     }
+
     public function about()
     {
-        $title = 'Welcome to Laravel 8 ';
-        $description = 'In this course we will learn Laravel from A to Z.
-                        This text was passed from the controller';
-
-        return view('products.about', compact('title','description')); // passing to
+        $name = 'Salem';
+        $names = ['john', 'maitha', 'bruno'];
+        return view('about', compact('name', 'names'));
     }
 
     /**
@@ -53,11 +48,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        return 'Product no. ' . $id;
-    }
-    public function showTwo($id, $name)
-    {
-        return $id . " " . $name;
+        //
     }
 
     /**
