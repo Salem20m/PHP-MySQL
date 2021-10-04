@@ -1,5 +1,21 @@
 * {
-    color: rebeccapurple;
+    color: black;
+    background: #e8e8e8;
 }
 
+.flex {
+    width: 500px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
+    justify-items: center;
+}

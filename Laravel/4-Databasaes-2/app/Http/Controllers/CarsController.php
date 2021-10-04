@@ -8,36 +8,31 @@ use App\Models\Car;         //-----------------------------//
 
 class CarsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        $cars = Car::where('make', '=', 'Lexus')->get();
         $cars = Car::all();
-        return view('index', ['cars' => $cars]);
+        return view('cars.index', ['cars' => $cars]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('cars.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $car = new Car;
+        $car->model = $request->input('model');
+        $car->make = $request->input('make');
+        $car->year = $request->input('year');
+
+        $car->save();
+
+        return redirect('cars');
     }
 
     /**
@@ -51,15 +46,12 @@ class CarsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        $car = Car::find($id);
+
+        return view('cars.edit')->with('car', $car);
     }
 
     /**
@@ -71,7 +63,14 @@ class CarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $car = Car::find($id);
+        $car->model = $request->input('model') ?? $car->model;
+        $car->make = $request->input('make');
+        $car->year = $request->input('year');
+
+        $car->save();
+
+        return redirect('cars');
     }
 
     /**
