@@ -35,15 +35,10 @@ class CarsController extends Controller
         return redirect('cars');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        dd("Salem");
     }
 
 
@@ -54,13 +49,7 @@ class CarsController extends Controller
         return view('cars.edit')->with('car', $car);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $car = Car::find($id);
@@ -73,14 +62,13 @@ class CarsController extends Controller
         return redirect('cars');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+        $car = Car::find($id);
+
+        $car->delete();
+
+        return redirect('cars');
     }
 }

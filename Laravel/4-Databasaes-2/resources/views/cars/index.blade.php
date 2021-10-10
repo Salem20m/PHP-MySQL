@@ -8,8 +8,16 @@
             @foreach($cars as $car)
                 <section>
                     <h2>
-                        {{ $car['model'] }} : {{ $car['make'] }} --
+                        {{ $car['model'] }} : {{ $car['make'] }}
+
                         <a href="{{ route('cars.edit', $car['id']) }}">Edit</a>
+
+                        <form action="{{ route('cars.destroy', $car['id']) }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit">Delete</button>
+                        </form>
+
                     </h2>
                 </section>
             @endforeach

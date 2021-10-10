@@ -1,11 +1,10 @@
 <?php
 
-    use App\Models\Make;
-    use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarsTable extends Migration
+class CreateMakesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,10 @@ class CreateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('makes', function (Blueprint $table) {
             $table->id();
-            $table->string('model');
-            $table->foreignIdFor(Make::class);
-            $table->integer('year');
+            $table->string("name");
+            $table->integer("founded");
         });
     }
 
@@ -29,6 +27,6 @@ class CreateCarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('makes');
     }
 }

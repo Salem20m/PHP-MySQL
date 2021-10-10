@@ -1,6 +1,8 @@
 * {
     color: black;
     background: #e8e8e8;
+    border: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .flex {
@@ -18,4 +20,29 @@ form {
     width: 200px;
     align-items: center;
     justify-items: center;
+}
+
+h2 a:last-of-type:before {
+    content: "";
+    border-left: solid 2px black;
+    padding-right: 7px;
+}
+
+h2 *{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+button {
+    text-decoration: underline;
+}
+h2 form {
+    display: inline;
+}
+
+input {
+    background: whitesmoke;
+    border: 1px solid gray;
+    margin: .5rem;
+    font-size: 1rem;
+    padding: .3em;
 }
