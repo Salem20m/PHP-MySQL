@@ -8,7 +8,7 @@
             @foreach($cars as $car)
                 <section>
                     <h2>
-                        {{ $car['model'] }} : {{ $car['make'] }}
+                        {{ $car['model'] }} : {{ $car['make']['name'] }}
 
                         <a href="{{ route('cars.edit', $car['id']) }}">Edit</a>
 

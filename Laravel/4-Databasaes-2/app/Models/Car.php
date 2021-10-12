@@ -14,4 +14,9 @@ class Car extends Model
     protected $primaryKey = 'id';
 
     public $timestamps = false;
+
+    //Many to one
+    public function make() {
+        return $this->belongsTo(Make::class);
+    }
 }

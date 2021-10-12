@@ -11,8 +11,10 @@ class CarsController extends Controller
 
     public function index()
     {
-        $cars = Car::where('make', '=', 'Lexus')->get();
-        $cars = Car::all();
+        //$cars = Car::where('make', '=', 'Lexus')->get();
+        //$cars = Car::all();
+        $cars = Car::with('make')->get();
+
         return view('cars.index', ['cars' => $cars]);
     }
 
@@ -27,7 +29,7 @@ class CarsController extends Controller
     {
         $car = new Car;
         $car->model = $request->input('model');
-        $car->make = $request->input('make');
+        $car->make_id = $request->input('make');
         $car->year = $request->input('year');
 
         $car->save();
@@ -54,7 +56,7 @@ class CarsController extends Controller
     {
         $car = Car::find($id);
         $car->model = $request->input('model') ?? $car->model;
-        $car->make = $request->input('make');
+        $car->make_id = $request->input('make');
         $car->year = $request->input('year');
 
         $car->save();
