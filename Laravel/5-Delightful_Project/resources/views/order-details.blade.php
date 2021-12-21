@@ -13,16 +13,16 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1 class="page-header">Order details 00001</h1>
+            <h1 class="page-header">Order details </h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-8 col-md-offset-2">
-            <p>Number: 00001</p>
-            <p>Date: 00/00/0000</p>
-            <p>Total Value: AED 5.50</p>
+            <p>Number: {{$order->order_id}}</p>
+            <p>Date: {{$order->date}}</p>
+            <p>Total Value: AED {{$order->value}}</p>
 
             <form role="form" class="form-inline">
                 <div class="form-group ">
@@ -40,7 +40,12 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="local" value="" checked disabled> Home delivery
+                            <input type="checkbox" name="local" value=""
+                                   @if($order->delivery)
+                                   checked
+                                   @endif
+                                   disabled>
+                            Home delivery
                         </label>
                     </div>
                 </div>
@@ -48,6 +53,7 @@
         </div>
     </div>
     <!-- /.row -->
+    @if($order->delivery)
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -55,7 +61,7 @@
                     <h3 class="panel-title">Delivery address</h3>
                 </div>
                 <div class="panel-body">
-                    Address: Lorem Ipsum St, 1234, Neighborhood, City
+                    {{$order->items()->first()->pivot->address}}
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -63,6 +69,7 @@
         </div>
         <!-- /.col-lg-6 -->
     </div>
+    @endif
     <!-- /.row -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -73,19 +80,20 @@
                         <table class="table table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Portions</th>
-                                    <th class="text-center">Value</th>
+                                    <th class="text-center">Item</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($items as $item)
                                 <tr>
-                                    <td>French Fries</td>
-                                    <td>AED 1.50</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->pivot->quantity}}</td>
+                                    <td>AED {{number_format($item->pivot->quantity * $item->price, 2)}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Steak</td>
-                                    <td>AED 4.00</td>
-                                </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -100,8 +108,8 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <p class="col-md-12">Delivery fee: AED 5.00</p>
-            <p class="col-md-12">Total order amount: AED 10.50</p>
+            <p class="col-md-12">Delivery fee: AED {{$order->fee}}</p>
+            <p class="col-md-12">Total order amount: AED {{$order->value}}</p>
         </div>
     </div>
     <!-- /.row -->

@@ -10,14 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('employees.orders-placed');
+        $orders = Order::with('user')->get();
+        //dd($orders);
+        return view('employees.orders-placed', compact('orders'));
     }
 
     public function fee()

@@ -23,11 +23,12 @@
                                     <label>Filter by: </label>
                                     <select class="form-control">
                                         <option>Select status</option>
-                                        <option value="approved">Approved</option>
-                                        <option value="disapproved">Disapproved</option>
-                                        <option value="production">In production</option>
-                                        <option value="delivery">Out for delivery</option>
-                                        <option value="finished">Finished</option>
+                                        <option value="Awaiting Approval">Awaiting Approval</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Disapproved">Disapproved</option>
+                                        <option value="In Production">In Production</option>
+                                        <option value="Left For Delivery">Left For Delivery</option>
+                                        <option value="Finalized">Finalized</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">OK</button>
@@ -51,7 +52,7 @@
                             <table class="table table-striped text-center">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Request number</th>
+                                        <th class="text-center">Order number</th>
                                         <th class="text-center">Date</th>
                                         <th class="text-center">Client</th>
                                         <th class="text-center">Value of the order</th>
@@ -60,46 +61,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($orders as $order)
                                     <tr>
-                                        <td>0001</td>
-                                        <td>00/00/0000</td>
-                                        <td>Anakin Skywalker</td>
-                                        <td>AED 100.00</td>
-                                        <td>Approved</td>
-                                        <td><a href="order-details.html">See Details</a></td>
+                                        <td>{{$order['order_id']}}</td>
+                                        <td>{{$order['date']}}</td>
+                                        <td>{{$order->user->name}}</td>
+                                        <td>AED {{$order->value}}</td>
+                                        <td>{{$order['status']}}</td>
+
+                                        <td><a href="{{route('order.show', $order['order_id'])}}">See Details</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>0002</td>
-                                        <td>00/00/0000</td>
-                                        <td>Dookan</td>
-                                        <td>AED 100.00</td>
-                                        <td>Approved</td>
-                                        <td><a href="order-details.html">See Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>0003</td>
-                                        <td>00/00/0000</td>
-                                        <td>Luke</td>
-                                        <td>AED 100.00</td>
-                                        <td>In production</td>
-                                        <td><a href="order-details.html">See Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>0004</td>
-                                        <td>00/00/0000</td>
-                                        <td>Obi-Wan Kenobi</td>
-                                        <td>AED 100.00</td>
-                                        <td>In production</td>
-                                        <td><a href="order-details.html">See Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>0005</td>
-                                        <td>00/00/0000</td>
-                                        <td>Qui-Gon</td>
-                                        <td>AED 100.00</td>
-                                        <td>Finished</td>
-                                        <td><a href="order-details.html">See Details</a></td>
-                                    </tr>
+                                @endforeach
+
                                 </tbody>
                             </table>
                         </div>

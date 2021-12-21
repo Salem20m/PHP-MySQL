@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Item;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CustomersController extends Controller
@@ -24,16 +26,16 @@ class CustomersController extends Controller
 
     public function historic()
     {
-        return view('customers.historic');
+        $id = Auth::user()->user_id;
+        $orders = Order::with('user')->where('user_id', $id)->get();
+
+        return view('customers.historic', compact('id', 'orders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
+
         return view('customers.register-client');
     }
 

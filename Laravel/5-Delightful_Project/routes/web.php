@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login');
     Route::get('logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
+    Route::get('/customer/create', [\App\Http\Controllers\CustomersController::class, 'create'])->name('customer.create');
 
     Route::middleware(['auth'])->group(function() {
         Route::get('/fee', [\App\Http\Controllers\EmployeesController::class, 'fee'])->name('employee.fee');
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
         Route::resource('/employee', \App\Http\Controllers\EmployeesController::class);
 
         Route::get('/customer/historic', [\App\Http\Controllers\CustomersController::class, 'historic'])->name('customer.historic');
-        Route::resource('/customer', \App\Http\Controllers\CustomersController::class);
+        Route::resource('/customer', \App\Http\Controllers\CustomersController::class)->except('create');
 
         Route::resource('/order', \App\Http\Controllers\OrderController::class);
     });

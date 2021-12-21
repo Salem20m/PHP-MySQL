@@ -49,7 +49,6 @@
                                     @endforeach
 
                                 </div>
-
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
@@ -83,7 +82,7 @@
                                         <label>City</label>
                                         <input class="aa form-control" placeholder="Enter your city" name="city" type="text" value="">
                                     </div>
-                                <div>
+                                </div>
                                 <button type="submit" class="btn btn-primary pull-right">Finish</button>
                             </form>
                         </div>

@@ -21,7 +21,7 @@
                         <table class="table table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Request number</th>
+                                    <th class="text-center">Order number</th>
                                     <th class="text-center">Date</th>
                                     <th class="text-center">Value of the order</th>
                                     <th class="text-center">Status</th>
@@ -29,41 +29,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            @foreach($orders as $order)
                                 <tr>
-                                    <td>0001</td>
-                                    <td>00/00/0000</td>
-                                    <td>AED 100.00</td>
-                                    <td>Approved</td>
-                                    <td><a href="{{route('order.index')}}">See Details</a></td>
+                                    <td>{{$order['order_id']}}</td>
+                                    <td>{{$order['date']}}</td>
+                                    <td>AED {{$order->value}}</td>
+                                    <td>{{$order['status']}}</td>
+
+                                    <td><a href="{{route('order.show', $order['order_id'])}}">See Details</a></td>
                                 </tr>
-                                <tr>
-                                    <td>0002</td>
-                                    <td>00/00/0000</td>
-                                    <td>AED 100.00</td>
-                                    <td>Approved</td>
-                                    <td><a href="#">See Details</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0003</td>
-                                    <td>00/00/0000</td>
-                                    <td>AED 100.00</td>
-                                    <td>In production</td>
-                                    <td><a href="#">See Details</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0004</td>
-                                    <td>00/00/0000</td>
-                                    <td>AED 100.00</td>
-                                    <td>In production</td>
-                                    <td><a href="#">See Details</a></td>
-                                </tr>
-                                <tr>
-                                    <td>0005</td>
-                                    <td>00/00/0000</td>
-                                    <td>AED 100.00</td>
-                                    <td>Finalized</td>
-                                    <td><a href="#">See Details</a></td>
-                                </tr>
+                            @endforeach
+
+
                             </tbody>
                         </table>
                     </div>

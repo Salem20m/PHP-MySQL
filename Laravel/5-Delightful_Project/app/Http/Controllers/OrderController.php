@@ -92,7 +92,19 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::with(['user', 'items'])->find($id);
+
+        //dd($order->items()->first()->pivot->address);
+        $items = $order->items()->get();
+        //foreach ($items as $item) {
+        //    dump($item->name);
+        //    dump($item->price);
+        //    dump($item->pivot->quantity * $item->price);
+        //}
+        //die;
+
+        return view('order-details', compact('order', 'items'));
+
     }
 
     /**
