@@ -11,11 +11,26 @@ use Illuminate\Support\Facades\Hash;
 class EmployeesController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('user')->get();
-        //dd($orders);
+
+        $orders = Order::with('user')->orderBy('order_id', 'DESC')->get();
+
         return view('employees.orders-placed', compact('orders'));
+    }
+
+    public function indexFiltered(Request $request)
+    {
+        $filter = [];
+        $filter[0] = $request->filter;
+        if($filter[0] == 'All')
+        {
+            return redirect()->route('employee.index');
+        }
+        $orders = Order::with('user')->where('status', $filter[0])
+            ->orderBy('order_id', 'DESC')->get();
+
+        return view('employees.orders-placed', compact('orders', 'filter'));
     }
 
     public function fee()

@@ -24,18 +24,22 @@
             <p>Date: {{$order->date}}</p>
             <p>Total Value: AED {{$order->value}}</p>
 
-            <form role="form" class="form-inline">
+            <form role="form" method="POST" action="{{ route('order.update', $order->order_id) }}">
+                @csrf
+                @method('PUT')
                 <div class="form-group ">
                     <label>Status</label>
-                    <select>
-                        <option value="approved">Approved</option>
-                        <option value="disapproved">Disapproved</option>
-                        <option value="production">In production</option>
-                        <option value="delivery">Out for delivery</option>
-                        <option value="finished">Finished</option>
+                    <select name="status" @if(Auth::user()->customer) disabled @endif">
+                        <option value="Awaiting Approval">Awaiting Approval</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Disapproved">Disapproved</option>
+                        <option value="In Production">In Production</option>
+                        <option value="Left For Delivery">Left For Delivery</option>
+                        <option value="Finalized">Finalized</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-xs">Change Status</button>
+                <button type="submit" class="btn btn-primary btn-xs @if(Auth::user()->customer) hidden @endif"
+                >Change Status</button>
                 <br />
                 <div class="form-group">
                     <div class="checkbox">
@@ -113,4 +117,14 @@
         </div>
     </div>
     <!-- /.row -->
+
+    <script>
+        var allInputs = document.querySelectorAll("option");
+        for(var x=0;x<allInputs.length;x++) {
+
+            if (allInputs[x].value == "{{$order->status}}")
+                allInputs[x].selected = true;
+        }
+    </script>
+
 @endsection

@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $items = Item::all();
@@ -35,7 +31,6 @@ class CustomersController extends Controller
 
     public function create()
     {
-
         return view('customers.register-client');
     }
 
@@ -43,7 +38,7 @@ class CustomersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -58,7 +53,7 @@ class CustomersController extends Controller
 
         $user->save();
 
-
+        return redirect()->route('index');
     }
 
     /**

@@ -1,8 +1,5 @@
 @extends('layout')
 
-@section('navigation')
-    @include('customers.navigation')
-@endsection
 
 @section('content')
 

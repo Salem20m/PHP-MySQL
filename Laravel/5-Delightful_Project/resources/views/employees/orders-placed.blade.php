@@ -18,11 +18,13 @@
                 <div class="panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" class="form-inline">
+                            <form role="form" class="form-inline" method="POST" action="{{route('employee.indexFiltered')}}">
+                                @csrf
+                                @method('GET')
                                 <div class="form-group">
                                     <label>Filter by: </label>
-                                    <select class="form-control">
-                                        <option>Select status</option>
+                                    <select name="filter" class="form-control">
+                                        <option>All</option>
                                         <option value="Awaiting Approval">Awaiting Approval</option>
                                         <option value="Approved">Approved</option>
                                         <option value="Disapproved">Disapproved</option>
@@ -87,4 +89,16 @@
         <!-- /.row -->
         <!-- /.row -->
 
+        <script>
+            var allInputs = document.querySelectorAll("option");
+            for(var x=0;x<allInputs.length;x++) {
+
+                if (allInputs[x].value == "{{$filter[0] ?? ''}}")
+                    allInputs[x].selected = true;
+            }
+        </script>
+
 @endsection
+
+
+
