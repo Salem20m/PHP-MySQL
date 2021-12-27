@@ -23,7 +23,7 @@ class CustomersController extends Controller
     public function historic()
     {
         $id = Auth::user()->user_id;
-        $orders = Order::with('user')->where('user_id', $id)->get();
+        $orders = Order::with('user')->where('user_id', $id)->orderBy('date', 'desc')->get();
 
         return view('customers.historic', compact('id', 'orders'));
     }

@@ -113,7 +113,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <p class="col-md-12">Delivery fee: AED {{$order->fee}}</p>
-            <p class="col-md-12">Total order amount: AED {{$order->value}}</p>
+            <p class="col-md-12">Total order amount: AED {{number_format($order->value + $order->fee, 2)}}</p>
         </div>
     </div>
     <!-- /.row -->

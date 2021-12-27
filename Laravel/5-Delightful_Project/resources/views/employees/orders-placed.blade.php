@@ -18,7 +18,7 @@
                 <div class="panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" class="form-inline" method="POST" action="{{route('employee.indexFiltered')}}">
+                            <form role="form" class="form-inline" method="POST" action="{{route('employee.index')}}">
                                 @csrf
                                 @method('GET')
                                 <div class="form-group">
@@ -93,7 +93,7 @@
             var allInputs = document.querySelectorAll("option");
             for(var x=0;x<allInputs.length;x++) {
 
-                if (allInputs[x].value == "{{$filter[0] ?? ''}}")
+                if (allInputs[x].value == "{{$filter ?? ''}}")
                     allInputs[x].selected = true;
             }
         </script>
