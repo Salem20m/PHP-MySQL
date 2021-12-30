@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/customer/store', [\App\Http\Controllers\CustomersController::class, 'store'])->name('customer.store');
 
 
-Route::middleware(['auth'])->group(function() {
+    Route::middleware(['auth'])->group(function() {
         Route::get('/fee', [\App\Http\Controllers\EmployeesController::class, 'fee'])->name('employee.fee');
         Route::post('/fee', [\App\Http\Controllers\EmployeesController::class, 'storeFee'])->name('employee.fee.store');
         Route::get('/employee/Filter', [\App\Http\Controllers\EmployeesController::class, 'indexFiltered'])->name('employee.indexFiltered');

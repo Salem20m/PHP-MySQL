@@ -18,6 +18,17 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
+
+                            @if($errors->any())
+                                <div>
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <form role="form" action="{{route('employee.store')}}" method="POST">
                                 @csrf
                                 <div class="form-group">

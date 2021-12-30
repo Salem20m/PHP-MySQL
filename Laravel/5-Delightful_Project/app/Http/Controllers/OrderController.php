@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderUpdateValidator;
 use App\Models\Fee;
 use App\Models\Item;
 use App\Models\Order;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -121,14 +123,21 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param OrderUpdateValidator $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderUpdateValidator $request, $id)
     {
+
         $order = Order::find($id);
         $order->status = $request->status;
+        $order->justification = null;
+
+        if($request->status == "Disapproved") {
+            $order->justification = $request->justification;
+        }
+
         $order->save();
 
         return redirect()->route('order.show', $id);

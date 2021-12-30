@@ -37,6 +37,12 @@
                         <option value="Left For Delivery">Left For Delivery</option>
                         <option value="Finalized">Finalized</option>
                     </select>
+
+                    <div class="form-group justification" @if($order->status != 'Disapproved') hidden @endif>
+                        <label for="justification">Justification</label>
+                        <textarea class="form-control" id="justification" name="justification"
+                                  @if(Auth::user()->customer) disabled @endif">{{$order->justification}}</textarea>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-xs @if(Auth::user()->customer) hidden @endif"
                 >Change Status</button>
@@ -119,12 +125,26 @@
     <!-- /.row -->
 
     <script>
-        var allInputs = document.querySelectorAll("option");
-        for(var x=0;x<allInputs.length;x++) {
+        let allInputs = document.querySelectorAll("option");
+        let select = document.querySelector("select");
+        let justify = document.querySelector(".justification");
 
+        select.addEventListener('change', function(){
+            if(this.value != 'Disapproved'){
+                justify.style.display = 'none';
+            }
+            else {
+                justify.style.display = 'block';
+            }
+        });
+
+        for(let x = 0; x < allInputs.length; x++) {
             if (allInputs[x].value == "{{$order->status}}")
                 allInputs[x].selected = true;
         }
+
+
+
     </script>
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserPostRequest;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Item;
@@ -37,11 +38,15 @@ class CustomersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserPostRequest $request
      * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserPostRequest $request)
     {
+        //$result = $request->validated();
+        //
+        //dd($result);
+
         $user = new User;
 
         $user->name = $request->input('name');
