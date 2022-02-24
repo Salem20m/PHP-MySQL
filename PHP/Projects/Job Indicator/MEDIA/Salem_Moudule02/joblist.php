@@ -12,7 +12,12 @@
 	
 	require_once "../lib/DB.php";
 	
-	$applicants = $DB->getApplicants(1);
+	$table = "jobs";
+	$jobs = $DB->findAll($table);
+	
+	
+	//echo "<pre>";
+	//var_dump($applicants[0]);
 
 ?>
 <!doctype html>
@@ -44,171 +49,77 @@
         </div>
 
         <div class="container">
+	        
             <!-- Accordion Parent -->
             <div class="accordion" id="accordionExample">
-                <!-- Accordion Item -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Web Designer
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion Item -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Database Administrator
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-
-                        </div>
-                    </div>
-                </div>
-
+	            
+	            <?php $i=0;
+		            foreach ($jobs as $job):
+		            $applicants = $DB->getApplicants($job['id']);?>
                 <!-- Accordion Item -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Front End Developer
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree-<?=$job['id'] ?>" aria-expanded="false" aria-controls="collapseThree">
+                            <?=$job['job'] ?>
                         </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionList">
+                    <div id="collapseThree-<?=$job['id'] ?>" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionList">
                         <div class="accordion-body">
                             <!-- Accordion Parent -->
                             <div class="accordion" id="accordionList">
-                                <!-- Accordion Item -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingFront">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStrehl" aria-expanded="true" aria-controls="collapseStrehl">
-                                            <div class="container ps-0">
-                                                <div class="row g-0 justify-content-around">
-                                                    <span class="col-6 p-0">Marcelo Strehl</span>
-                                                    <span class="col-6 score text-end">56.76</span>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseStrehl" class="accordion-collapse collapse" aria-labelledby="headingFront" data-bs-parent="#accordionList">
-                                        <div class="accordion-body">
 
-                                        </div>
-                                    </div>
-                                </div>
+	                            <?php
+		                            foreach($applicants as $a):
+			                        //    echo "<pre>";
+		                            //var_dump($a);
+		                            ?>
 
                                 <!-- Accordion Item -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingFront">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDoe" aria-expanded="true" aria-controls="collapseDoe">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMac-<?=$i?>" aria-expanded="false" aria-controls="collapseMac">
                                             <div class="container ps-0">
                                                 <div class="row g-0 justify-content-around">
-                                                    <span class="col-6 p-0">John Doe</span>
-                                                    <span class="col-6 score text-end">55.14</span>
-                                                </div>
-                                            </div>
-                                        </button>
-
-
-                                    </h2>
-                                    <div id="collapseDoe" class="accordion-collapse collapse" aria-labelledby="headingFront" data-bs-parent="#accordionList">
-                                        <div class="accordion-body">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Accordion Item -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingFront">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMiranda" aria-expanded="true" aria-controls="collapseMiranda">
-                                            <div class="container ps-0">
-                                                <div class="row g-0 justify-content-around">
-                                                    <span class="col-6 p-0">Mary Miranda</span>
-                                                    <span class="col-6 score text-end">22.39</span>
+                                                    <span class="col-6 p-0"><?=  $a['name'] ?></span>
+                                                    <span class="col-6 score text-end"><?=  $a['referral_value'] ?></span>
                                                 </div>
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="collapseMiranda" class="accordion-collapse collapse" aria-labelledby="headingFront" data-bs-parent="#accordionList">
+                                    <div id="collapseMac-<?=$i?>" class="accordion-collapse collapse" aria-labelledby="headingFront" data-bs-parent="#accordionList">
                                         <div class="accordion-body">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Accordion Item -->
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingFront">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMac" aria-expanded="true" aria-controls="collapseMac">
-                                            <div class="container ps-0">
-                                                <div class="row g-0 justify-content-around">
-                                                    <span class="col-6 p-0">Paul McDonnalds</span>
-                                                    <span class="col-6 score text-end">27.00</span>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseMac" class="accordion-collapse collapse show" aria-labelledby="headingFront" data-bs-parent="#accordionList">
-                                        <div class="accordion-body">
-                                            <p>E-mail: paul.mac@gmail.com</p>
-                                            <p>Phone Number: +1 443 3331-0012</p>
+                                            <p><?=  $a['email'] ?></p>
+                                            <p><?=  $a['phone'] ?></p>
                                             <div class="row">
                                                 <h6>Competences Levels</h6>
 
                                                 <div class="mb-3 col-6">
                                                     <ul>
+	                                                    
+	                                                    <?php foreach($a['competences_levels'] as $competence): ?>
                                                         <li class="row justify-content-end">
-                                                            <span class="col-6">HTML</span>
-                                                            <span class="col-6">No knowledge</span>
+                                                            <span class="col-6"><?=$competence['competence']?></span>
+                                                            <span class="col-6"><?=$competence['level']?></span>
                                                         </li>
+	                                                    <?php endforeach; ?>
 
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">CSS</span>
-                                                            <span class="col-6">Beginner</span>
-                                                        </li>
-
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">Javascript</span>
-                                                            <span class="col-6">Beginner</span>
-                                                        </li>
-
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">Angular framework</span>
-                                                            <span class="col-6">Full</span>
-                                                        </li>
-
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">Automated Tests</span>
-                                                            <span class="col-6">No knowledge</span>
-                                                        </li>
-
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">Work in groups</span>
-                                                            <span class="col-6">Senior</span>
-                                                        </li>
-
-                                                        <li class="row justify-content-end">
-                                                            <span class="col-6">Work with Agile Methods</span>
-                                                            <span class="col-6">Full</span>
-                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+	                        
+	                            <?php $i = $i + 1;
+	                            endforeach; ?>
+	                            
                             </div>
                         </div>
                     </div>
                 </div>
+	            
+	            <?php endforeach; ?>
+	            
             </div>
 
 

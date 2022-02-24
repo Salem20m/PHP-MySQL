@@ -73,6 +73,24 @@ class DB
 
 		return $stmt->fetch();
 	}
+	
+	public function findColumn($table, $column, $where = 1, array $data = null)
+	{
+		try {
+			$query = "SELECT $column FROM $table WHERE $where";
+			
+			if ($data) {
+				$stmt = $this->pdo->prepare($query);
+				$stmt->execute($data);
+			} else {
+				$stmt = $this->pdo->query($query);
+			}
+		} catch (PDOException $e) {
+			throw $e;
+		}
+		
+		return $stmt->fetchColumn();
+	}
 
 	public function findAll($table, $columns = "*", $where = 1, array $data = null)
 	{
