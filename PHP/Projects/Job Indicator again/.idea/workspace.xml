@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e9f7a3a-bdb3-489b-b8cb-71799fdbfe5e" name="Changes" comment="" />
+    <list default="true" id="8e9f7a3a-bdb3-489b-b8cb-71799fdbfe5e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Job Indicator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Job Indicator/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +22,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MEDIA/database_dump/job_indicator.sql" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -39,6 +42,7 @@
       <workItem from="1645626477948" duration="43000" />
       <workItem from="1645626522286" duration="73000" />
       <workItem from="1646130052129" duration="160000" />
+      <workItem from="1646312690471" duration="12770000" />
     </task>
     <servers />
   </component>
