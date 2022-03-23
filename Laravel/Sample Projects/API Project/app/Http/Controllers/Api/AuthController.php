@@ -23,6 +23,12 @@ class AuthController extends Controller
             ->where('registration_code', $request->get('registration_code'))->first();
 
         if (!$attendee) {
+            $data = [
+                "data" => [
+                    "token" =>
+                ]
+            ];
+
             return response()->json(['message' => 'Invalid login'], 401);
         }
 
