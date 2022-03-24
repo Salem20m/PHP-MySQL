@@ -10,15 +10,6 @@ use Illuminate\Support\Str;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        echo "Oi";
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,14 +26,20 @@ class StaffController extends Controller
         // if this function fails, it will throw a ValidationException
         // It will then bbe handled in the Handler.php file
         $this->validate($request, $rules);
-        $new = new Staff;
 
-        //dd($request);
+        $new = Staff::create([
+           "full_name" => $request->full_name,
+           "photo" => $request->file('photo')->store('photos', 'public'),
+           "code" => Str::random(32)
+        ]);
 
-        $new->full_name = $request->full_name;
-        $new->photo = $request->file('photo')->store('photos', 'public');
-        $new->code = Str::random(32);
-        $new->save();
+        //Other Way----------------
+        //$new = new Staff;
+        //
+        //$new->full_name = $request->full_name;
+        //$new->photo = $request->file('photo')->store('photos', 'public');
+        //$new->code = Str::random(32);
+        //$new->save();
 
 
         $data = [
@@ -54,21 +51,10 @@ class StaffController extends Controller
         return response()->json(['data'=>$data], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -82,37 +68,6 @@ class StaffController extends Controller
         ]], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

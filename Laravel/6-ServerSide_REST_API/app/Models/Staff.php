@@ -12,12 +12,12 @@ class Staff extends Model
     use HasFactory;
 
     public $timestamps = false;
-    //
-    //protected $fillable = [
-    //    'full_name',
-    //    'photo',
-    //    'code'
-    //];
+
+    protected $fillable = [
+        'full_name',
+        'photo',
+        'code'
+    ];
 
     protected function photo(): Attribute
     {

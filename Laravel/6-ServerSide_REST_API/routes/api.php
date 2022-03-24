@@ -20,9 +20,13 @@ use App\Http\Controllers\StaffController;
 
 Route::post('login', [\App\Http\Controllers\LoginController::class ,'authenticate']);
 
-Route::middleware('auth')->group(function() {
+//                  "auth:api" because we are using it for APIs
+//                  "auth" will be for web
+Route::middleware('auth:api')->group(function() {
     Route::post('/staff', [\App\Http\Controllers\StaffController::class, 'create']);
     Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'show']);
+    Route::post('/points', [\App\Http\Controllers\PointsController::class, 'create']);
+    Route::get('/points', [\App\Http\Controllers\PointsController::class, 'show']);
 });
 
 
