@@ -14,13 +14,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Removing Timestaps ------------------ IMPORTANT
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
-
     protected $fillable = [
         'login',
         'full_name',
@@ -47,7 +48,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function createToken(): string
+    public function createToken()
     {
         $token = Str::random(40);
 
@@ -56,4 +57,5 @@ class User extends Authenticatable
 
         return $token;
     }
+
 }

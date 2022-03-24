@@ -16,64 +16,53 @@ class LoginController extends Controller
 {
     public function authenticate(Request $request) {
 
-        $credentials = $request->all();
-
-        $validator = Validator::make($credentials, [
+        $rules = [
             'login' => 'required',
             'password' => 'required',
-        ]);
+        ];
 
-        //$errors = $validator->errors()->toArray();
-       // //$map = $errors->map(function($error) {
-       // //    return collect($error)->map(function ($item) use ($error) {
-       // //        return $error => $item;
-       // //    });
-       // //});
-       //
-       // dd($errors);
-       //
-        $flattened = [];
+        // if this function fails, it will throw a ValidationException
+        // It will then bbe handled in the Handler.php file
+        $this->validate($request, $rules);
 
-       foreach ($validator->errors() as $key){
-           foreach ($key as $error){
-               $flattened[$key][] = $error;
-           }
-       }
+        //$validator = Validator::make($credentials, $rules);
+        //if($validator->fails()) {
+        //    $data = [
+        //        'code' => 422,
+        //        'message' => 'Validation error',
+        //        "errors" => $validator->errors()
+        //    ];
+        //    return response()->json(['error'=>$data], 422);
+        //}
 
-       dd($flattened);
-
-        if($validator->fails()) {
-            $data = [
-                'code' => 422,
-                'message' => 'Validation error',
-                "errors" => $validator->errors()
-            ];
-            return response()->json(['error'=>$data], 422);
-        }
+        $credentials = $request->all();
 
         if (Auth::attempt($credentials)) {
-            $token = $request->user()->createToken();
-
-            // get user from
+            //$user = Auth::user();
             $user = User::where('login',$request->login)->first();
+
+            $token = $user->createToken();
+            //dd($token);
+
 
             $data = [
                 'token' => $token,
                 'full_name' => $user->full_name,
             ];
 
+
             return response()->json(['data'=>$data], 200);
         }
-        else {
-            $data = [
-                'code' => 401,
-                'message' => 'Unauthorized',
-                "errors" => [
-                    'login' => 'invalid credentials'
-                ],
-            ];
 
-            return response()->json(['error'=>$data], 401);
-        }
+        $data = [
+            'code' => 401,
+            'message' => 'Unauthorized',
+            "errors" => [
+                'login' => 'invalid credentials'
+            ],
+        ];
+
+        return response()->json(['error'=>$data], 401);
+
     }
 }

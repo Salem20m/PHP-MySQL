@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 //Route::prefix('api')->group() {
 //}
 
-Route::post('/login', [\App\Http\Controllers\LoginController::class ,'authenticate']);
+Route::post('login', [\App\Http\Controllers\LoginController::class ,'authenticate']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth')->group(function() {
+    Route::post('/staff', [\App\Http\Controllers\StaffController::class, 'create']);
+    Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'show']);
 });
+
+
