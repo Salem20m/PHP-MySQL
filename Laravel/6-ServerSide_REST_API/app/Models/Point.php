@@ -26,5 +26,8 @@ class Point extends Model
         return $this->hasMany(Point::class, 'parent');
     }
 
+    public function groups() {
+        return $this->belongsToMany(Group::class, 'group_points', 'point_id', 'group_id');
+    }
 
 }

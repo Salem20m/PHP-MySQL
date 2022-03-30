@@ -28,4 +28,13 @@ class Staff extends Model
             get: fn($value) => url(Storage::url($value))
         );
     }
+
+    public function groups() {
+        return $this->belongsToMany(Group::class, 'group_staff', 'staff_id', 'group_id');
+
+    }
+
+    public function logs() {
+        return $this->hasMany(Log::class);
+    }
 }
