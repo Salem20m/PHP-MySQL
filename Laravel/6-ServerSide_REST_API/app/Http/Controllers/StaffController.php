@@ -215,7 +215,7 @@ class StaffController extends Controller
             'time' => $request->time
         ]);
 
-        return response()->json(null, 201);
+        return response(null, 201);
     }
 
 

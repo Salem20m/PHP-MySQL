@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
             $data = [
                 'code' => 422,
                 'message' => 'Validation error',
-                "errors" => $e->validator->errors()->toArray()
+                "errors" => $e->validator->errors()
             ];
 
             return response()->json(['error'=>$data], 422);

@@ -29,7 +29,6 @@ class ApiRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        //dd($validator);
         $data = [
             'code' => 422,
             'message' => 'Validation error',

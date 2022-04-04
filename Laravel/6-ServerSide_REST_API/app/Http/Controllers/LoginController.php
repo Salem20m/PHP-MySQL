@@ -44,7 +44,6 @@ class LoginController extends Controller
             $token = $user->createToken();
             //dd($token);
 
-
             $data = [
                 'token' => $token,
                 'full_name' => $user->full_name,
