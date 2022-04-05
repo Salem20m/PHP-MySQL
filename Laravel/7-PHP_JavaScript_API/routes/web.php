@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +16,14 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('login');
 
 Route::post('/',[LoginController::class, 'authenticate'])->name('auth');
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('events/{id}', [LoginController::class, 'events'])->name('events');
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::resource('events',EventController::class);
+    //Route::get('event/{id}', [EventController::class, 'index'])->name('events.index');
+    //Route::get('event/{id}', [EventController::class, 'create'])->name('events.create');
 });

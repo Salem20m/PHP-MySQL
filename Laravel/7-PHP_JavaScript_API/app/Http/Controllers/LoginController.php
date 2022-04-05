@@ -14,7 +14,7 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('events', Auth::user()->id);
+            return redirect()->route('events.index');
         }
 
         return back()->withErrors([
@@ -25,10 +25,12 @@ class LoginController extends Controller
         return view('index', compact('error'));
     }
 
-    public function events($id) {
-        $organizer = Auth::user();
-        return view('events/index', compact('organizer'));
-    }
 
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+
+        return redirect()->route('login');
+    }
 
 }

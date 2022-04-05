@@ -56,7 +56,7 @@ class LoginControllessssssr extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

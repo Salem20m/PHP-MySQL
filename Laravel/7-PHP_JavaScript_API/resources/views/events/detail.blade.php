@@ -16,29 +16,22 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="events/index.html">Event Platform</a>
-    <span class="navbar-organizer w-100">{insert organization name}</span>
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" id="logout" href="7-PHP_JavaScript_API/resources/views/events/index.blade.php">Sign out</a>
-        </li>
-    </ul>
-</nav>
+    @include('events.header')
+
 
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="events/index.html">Manage Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('events.index')}}">Manage Events</a></li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>{insert event name}</span>
+                    <span>{{$event->name}}</span>
                 </h6>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="events/detail.html">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('events.show', $event->id)}}">Overview</a></li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -53,14 +46,14 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="border-bottom mb-3 pt-3 pb-2 event-title">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-                    <h1 class="h2">{insert event name}</h1>
+                    <h1 class="h2">{{$event->name}}</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="events/edit.html" class="btn btn-sm btn-outline-secondary">Edit event</a>
+                            <a href="{{route('events.edit', $event->id)}}" class="btn btn-sm btn-outline-secondary">Edit event</a>
                         </div>
                     </div>
                 </div>
-                <span class="h6">{insert event date}</span>
+                <span class="h6">{{$event->date}}</span>
             </div>
 
             <!-- Tickets -->

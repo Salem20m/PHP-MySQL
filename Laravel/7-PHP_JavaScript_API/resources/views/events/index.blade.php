@@ -16,22 +16,14 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="events/index.html">Event Platform</a>
-    {{--<span class="navbar-organizer w-100">{{{$organizer->name}}}</span>--}}
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" id="logout" href="index.blade.php">Sign out</a>
-        </li>
-    </ul>
-</nav>
+@include('events.header')
 
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="events/index.html">Manage Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('events.index')}}">Manage Events</a></li>
                 </ul>
             </div>
         </nav>
@@ -41,7 +33,7 @@
                 <h1 class="h2">Manage Events</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <a href="events/create.html" class="btn btn-sm btn-outline-secondary">Create new event</a>
+                        <a href="{{route('events.create')}}" class="btn btn-sm btn-outline-secondary">Create new event</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +44,7 @@
 
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <a href="events/detail.html" class="btn text-left event">
+                            <a href="{{route('events.show',$event->id)}}" class="btn text-left event">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$event->name}}</h5>
                                     <p class="card-subtitle">{{$event->date}}</p>

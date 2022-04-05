@@ -16,22 +16,14 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="events/index.html">Event Platform</a>
-    <span class="navbar-organizer w-100">{insert organization name}</span>
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" id="logout" href="7-PHP_JavaScript_API/resources/views/events/index.blade.php">Sign out</a>
-        </li>
-    </ul>
-</nav>
+@include('events.header')
 
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="events/index.html">Manage Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('events.index')}}">Manage Events</a></li>
                 </ul>
             </div>
         </nav>
@@ -48,13 +40,16 @@
                 </div>
             </div>
 
-            <form class="needs-validation" novalidate action="events/detail.html">
-
+            <form class="needs-validation" action="{{route('events.store')}}" method="post">
+                @csrf
+                @method('post')
+                {{dump($test ?? '')}}
+                {{--{{dump($errors)}}--}}
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="inputName">Name</label>
-                        <!-- adding the class is-invalid to the input, shows the invalid feedback below -->
-                        <input type="text" class="form-control is-invalid" id="inputName" name="name" placeholder="" value="">
+                        <!-- adding the class is-invalid to the input, shows the invalid feedback below -->     <!-- old() method to recover the input after validation fail -->
+                        <input type="text" class="form-control is-invalid" id="inputName" name="name" placeholder="" value="{{old('name')}}" required>
                         <div class="invalid-feedback">
                             Name is required.
                         </div>
@@ -64,7 +59,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="inputSlug">Slug</label>
-                        <input type="text" class="form-control" id="inputSlug" name="slug" placeholder="" value="">
+                        <input type="text" class="form-control" id="inputSlug" name="slug" placeholder="" value="{{old('slug')}}" required>
                     </div>
                 </div>
 
@@ -76,7 +71,8 @@
                                id="inputDate"
                                name="date"
                                placeholder="yyyy-mm-dd"
-                               value="">
+                               value="{{old('date')}}" required>
+
                     </div>
                 </div>
 
