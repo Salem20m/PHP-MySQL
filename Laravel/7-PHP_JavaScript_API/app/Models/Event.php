@@ -27,11 +27,25 @@ class Event extends Model
     protected function date(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format("F d, Y")
+            get: fn ($value) => Carbon::parse($value)->format("F d, Y"),
+            set: fn ($value) => Carbon::parse($value)->format("Y-m-d")
         );
     }
 
+
     public function organizer() {
         return $this->belongsTo(Organizer::class, 'organizer_id', 'id');
+    }
+
+    public function tickets() {
+        return $this->hasMany(Ticket::class, 'event_id', 'id');
+    }
+
+    public function channels() {
+        return $this->hasMany(Channel::class, 'event_id', 'id');
+    }
+
+    public function rooms() {
+        return $this->hasManyThrough(Room::class, Channel::class);
     }
 }

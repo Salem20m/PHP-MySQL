@@ -44,6 +44,11 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            @if(session('status'))
+                <div class="alert alert-success mt-5" role="alert">
+                    {{session('status')}}
+                </div>
+            @endif
             <div class="border-bottom mb-3 pt-3 pb-2 event-title">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                     <h1 class="h2">{{$event->name}}</h1>
@@ -62,7 +67,7 @@
                     <h2 class="h4">Tickets</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="tickets/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('ticket.create', $event->id)}}" class="btn btn-sm btn-outline-secondary">
                                 Create new ticket
                             </a>
                         </div>
@@ -71,33 +76,17 @@
             </div>
 
             <div class="row tickets">
-                <div class="col-md-4">
+                @foreach($event->tickets as $ticket)
+                    <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">Normal</h5>
-                            <p class="card-text">200.-</p>
+                            <h5 class="card-title">{{$ticket->name}}</h5>
+                            <p class="card-text">AED {{$ticket->cost}}</p>
                             <p class="card-text">&nbsp;</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Early Bird</h5>
-                            <p class="card-text">120.-</p>
-                            <p class="card-text">Available until June 1, 2019</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">VIP</h5>
-                            <p class="card-text">400.-</p>
-                            <p class="card-text">100 tickets available</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <!-- Sessions -->
@@ -157,7 +146,7 @@
                     <h2 class="h4">Channels</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="channels/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('channels.create', $event->id)}}" class="btn btn-sm btn-outline-secondary">
                                 Create new channel
                             </a>
                         </div>
@@ -166,22 +155,16 @@
             </div>
 
             <div class="row channels">
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Main</h5>
-                            <p class="card-text">3 sessions, 1 room</p>
+                @foreach($event->channels as $channel)
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$channel->name}}</h5>
+                                <p class="card-text">3 sessions, 1 room ((DON'T FORGET TO DO IT))</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Side</h5>
-                            <p class="card-text">15 sessions, 2 rooms</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <!-- Rooms -->
@@ -190,7 +173,7 @@
                     <h2 class="h4">Rooms</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="rooms/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('rooms.create', $event->id)}}" class="btn btn-sm btn-outline-secondary">
                                 Create new room
                             </a>
                         </div>
@@ -207,22 +190,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($event->rooms as $room)
                     <tr>
-                        <td>Room A</td>
-                        <td>1,000</td>
+                        <td>{{$room->name}}</td>
+                        <td>{{$room->capacity}}</td>
                     </tr>
-                    <tr>
-                        <td>Room B</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>Room C</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>Room D</td>
-                        <td>250</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
