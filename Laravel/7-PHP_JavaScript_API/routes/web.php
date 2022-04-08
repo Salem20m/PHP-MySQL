@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\SessionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,4 +39,10 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/events/{event}/channels/create', [ChannelController::class, 'create'])->name('channels.create');
     Route::post('/events/{event}/channels', [ChannelController::class, 'store'])->name('channels.store');
+
+    Route::get('/events/{event}/sessions/create', [SessionController::class, 'create'])->name('sessions.create');
+    Route::post('/events/{event}/sessions', [SessionController::class, 'store'])->name('sessions.store');
+
+    Route::get('/events/{event}/sessions/{id}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
+    Route::put('/events/{event}/sessions/{id}', [SessionController::class, 'update'])->name('sessions.update');
 });

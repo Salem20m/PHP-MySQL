@@ -43,6 +43,6 @@
     {{--                @endforeach--}}
     <hr class="mb-4">
 
-    <button class="btn btn-primary" type="submit">{{ ($event       ) ? "Edit" : "Save" }} event</button>
+    <button class="btn btn-primary" type="submit">{{ isset($event) ? "Edit" : "Save" }} event</button>
     <a href="{{route('events.index')}}" class="btn btn-link">Cancel</a>
 </form>

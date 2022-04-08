@@ -16,11 +16,18 @@ class Channel extends Model
         'name',
     ];
 
-    public function event() {
+    public function event()
+    {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
-    public function room() {
+    public function rooms()
+    {
         return $this->hasMany(Room::class, 'channel_id', 'id');
+    }
+
+    public function sessions()
+    {
+        return $this->hasManyThrough(Session::class, Room::class);
     }
 }

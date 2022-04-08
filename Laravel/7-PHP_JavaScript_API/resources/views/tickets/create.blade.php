@@ -63,7 +63,6 @@
             <form class="needs-validation" novalidate action="{{route('ticket.store', $event->id)}}" method="post">
                 @method('POST')
                 @csrf
-                {{dump($errors)}}
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <label for="inputName">Name</label>

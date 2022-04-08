@@ -48,4 +48,9 @@ class Event extends Model
     public function rooms() {
         return $this->hasManyThrough(Room::class, Channel::class);
     }
+
+//    public function sessions() {
+//        return $this->hasManyThrough(Session::class, Channel::class);
+//    }
+
 }

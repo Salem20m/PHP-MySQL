@@ -20,4 +20,8 @@ class Room extends Model
     public function channel() {
         return $this->belongsTo(Channel::class, 'channel_id', 'id');
     }
+
+    public function sessions() {
+        return $this->hasMany(Session::class, 'room_id', 'id');
+    }
 }

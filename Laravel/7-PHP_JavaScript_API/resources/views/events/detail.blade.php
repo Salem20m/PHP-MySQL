@@ -95,7 +95,7 @@
                     <h2 class="h4">Sessions</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="sessions/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('sessions.create', $event->id)}}" class="btn btn-sm btn-outline-secondary">
                                 Create new session
                             </a>
                         </div>
@@ -115,27 +115,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="text-nowrap">08:30 - 10:00</td>
-                        <td>Talk</td>
-                        <td><a href="sessions/edit.html">Keynote</a></td>
-                        <td class="text-nowrap">An important person</td>
-                        <td class="text-nowrap">Main / Room A</td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap">10:15 - 11:00</td>
-                        <td>Talk</td>
-                        <td><a href="sessions/edit.html">What's new in X?</a></td>
-                        <td class="text-nowrap">Another person</td>
-                        <td class="text-nowrap">Main / Room A</td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap">10:15 - 11:00</td>
-                        <td>Workshop</td>
-                        <td><a href="sessions/edit.html">Hands-on with Y</a></td>
-                        <td class="text-nowrap">Another person</td>
-                        <td class="text-nowrap">Side / Room C</td>
-                    </tr>
+                    @foreach($event->channels as $channel)
+                        @foreach($channel->sessions as $session)
+                            <tr>
+                                <td class="text-nowrap">{{$session->getHours()}}</td>
+                                <td>{{$session->type}}</td>
+                                <td><a href="{{route('sessions.edit', [$event->id, $session->id])}}">{{$session->title}}</a></td>
+                                <td class="text-nowrap">{{$session->speaker}}</td>
+                                <td class="text-nowrap">{{$session->room->name}}</td>
+                            </tr>
+                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -160,7 +150,7 @@
                         <div class="card mb-4 shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title">{{$channel->name}}</h5>
-                                <p class="card-text">3 sessions, 1 room ((DON'T FORGET TO DO IT))</p>
+                                <p class="card-text">3 sessions, {{count($channel->rooms->toArray()) ?? 'Hey'}} rooms ((DON'T FORGET TO DO IT))</p>
                             </div>
                         </div>
                     </div>
