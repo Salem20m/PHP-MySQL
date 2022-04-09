@@ -24,4 +24,10 @@ class Attendee extends Model
         'registration_code',
         'login_token',
     ];
+
+    public function registrations() {
+        return $this->hasMany(Registration::class, 'attendee_id', 'id');
+    }
+
+
 }

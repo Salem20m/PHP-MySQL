@@ -8,11 +8,7 @@
 
     <title>Event Backend</title>
 
-    <base href="../">
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!-- Custom styles -->
-    <link href="assets/css/custom.css" rel="stylesheet">
+    @include('styles')
 </head>
 
 <body>
@@ -54,7 +50,7 @@
                                     <h5 class="card-title">{{$event->name}}</h5>
                                     <p class="card-subtitle">{{$event->date}}</p>
                                     <hr>
-                                    <p class="card-text">3,546 registrations</p>
+                                    <p class="card-text">{{count($event->registrations)}} registrations</p>
                                 </div>
                             </a>
                         </div>
