@@ -21,6 +21,7 @@ use App\Http\Controllers\GroupsController;
 //}
 
 Route::post('login', [LoginController::class ,'authenticate']);
+Route::post('register', [LoginController::class, 'registerUser']);
 
 //                  "auth:api" because we are using it for APIs
 //                  "auth" will be for web
@@ -36,6 +37,17 @@ Route::middleware('auth:api')->group(function() {
     Route::post('/access', [StaffController::class, 'access']);
     Route::get('/logs', [StaffController::class, 'showLogs']);
     Route::post('/staff/{id}/access', [StaffController::class, 'giveAccess']);
+
+    Route::delete('/points/{id}', [PointsController::class, 'delete']);
+    Route::delete('/groups/{id}', [GroupsController::class, 'delete']);
+    Route::get('/groups/{id}', [GroupsController::class, 'showByID']);
+    Route::delete('/groups/{id}/staff', [GroupsController::class, 'deleteStaff']);
+    Route::delete('/groups/{id}/points', [GroupsController::class, 'deletePoints']);
+    Route::patch('/points/{id}', [PointsController::class, 'update']);
+
+
+
+
 
 
 

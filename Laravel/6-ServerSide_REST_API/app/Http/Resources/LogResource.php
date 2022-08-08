@@ -22,7 +22,6 @@ class LogResource extends JsonResource
         $staff = Staff::select("id", "full_name","photo")->find($this->staff_id);
         $camera = $this->camera;
         $staff->camera = $camera;
-        //dd($staff);
 
         return [
             "access" => (bool) $this->access,

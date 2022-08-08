@@ -99,7 +99,9 @@ class PointsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $point = Point::where('id', $id)->first();
+        $point->name = $request->name;
+        $point->save();
     }
 
     /**
@@ -108,8 +110,8 @@ class PointsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        Point::where('id',$id)->delete();
     }
 }

@@ -11,6 +11,8 @@ class Point extends Model
 {
     use HasFactory;
 
+    //protected $table = 'points_edited';
+
     public $timestamps = false;
 
     protected $fillable = [

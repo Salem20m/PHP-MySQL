@@ -72,5 +72,53 @@ class GroupsController extends Controller
         return response(null, 201);
     }
 
+    public function delete(Request $request, $id)
+    {
+        Group::where('id', $id)->delete();
+    }
+
+    public function showByID($id)
+    {
+        $group = Group::where('id', $id)->first();
+
+        $data = [
+            'id' => $group->id,
+            'name' => $group->name,
+            'staff' => $group->staff->map->id,
+            'points' => $group->points->map->id
+        ];
+
+        return response()->json(['data'=>$data],200);
+    }
+
+    public function deleteStaff(Request $request, $id)
+    {
+        $rules = [
+            'staff' => 'required|array|exists:staff,id'
+        ];
+
+        $this->validate($request, $rules);
+
+        $group = Group::where('id', $id)->first();
+
+        foreach ($request->staff as $staffID) {
+            $group->staff()->detach($staffID);
+        }
+    }
+
+    public function deletePoints(Request $request, $id)
+    {
+        $rules = [
+            'points' => 'required|array|exists:points,id'
+        ];
+
+        $this->validate($request, $rules);
+
+        $group = Group::where('id', $id)->first();
+
+        foreach ($request->points as $pointID) {
+            $group->points()->detach($pointID);
+        }
+    }
 
 }

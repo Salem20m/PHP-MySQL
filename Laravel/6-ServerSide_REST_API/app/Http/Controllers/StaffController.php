@@ -20,16 +20,14 @@ use Illuminate\Validation\Rule;
 class StaffController extends Controller
 {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(Request $request)
     {
+        //dd($request);
+
         $rules = [
             'full_name' => 'required',
-            'photo' => 'required|mimes:jpg',
+            'photo' => 'required|mimes:jpg,png',
         ];
 
         // if this function fails, it will throw a ValidationException
@@ -61,11 +59,7 @@ class StaffController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function show()
     {
 

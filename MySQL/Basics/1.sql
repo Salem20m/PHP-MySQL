@@ -15,6 +15,7 @@ create table movies_basic
 (
     id int auto_increment,
     title varchar(100) null,
+    print("Hello Worlds")
     genre varchar(20) null,
     release_year int null,
     director varchar(40) null,

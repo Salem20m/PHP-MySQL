@@ -9,6 +9,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -62,6 +63,32 @@ class LoginController extends Controller
         ];
 
         return response()->json(['error'=>$data], 401);
+
+    }
+
+    public function registerUser(Request $request) {
+
+        $rules = [
+            'full_name' => 'required',
+            'login' => 'required|unique:users,login',
+            'password' => 'required',
+        ];
+
+
+        $this->validate($request, $rules);
+
+        $newUser = User::create([
+            'full_name' => $request->full_name,
+            'login' => $request->login,
+            'password' => Hash::make($request->password)
+        ]);
+
+        $data = [
+            'id' => $newUser->id,
+            'full_name' => $newUser->full_name,
+        ];
+
+        return response()->json(['data'=>$data], 201);
 
     }
 }

@@ -15,9 +15,9 @@ class apiRegistrationResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
-            "event" => $this->ticket->event->makeHidden(['organizer_id', 'organizer']),
+            "event" => $this->ticket->event->only(['id', 'name', 'slug', 'date']),
+            //"event" => $this->ticket->event->makeHidden(['organizer_id', 'organizer']),
             "organizer" =>  $this->ticket->event->organizer->makeHidden('email'),
             "session_ids" => $this->workshopRegistrations->map->pivot->map->session_id,
         ];
